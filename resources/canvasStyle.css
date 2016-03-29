@@ -1,0 +1,162 @@
+body {
+  background-color: #ddd;
+}
+
+#topBar {
+  height: 116px;
+  margin: 0px;
+  border: 8px solid #aaa;
+  background-color: #eee;
+}
+
+.btn {
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 0px;
+  float: left;
+}
+
+.square {
+  height: 80px;
+  width: 80px;
+}
+
+.rect {
+  height: 35px;
+  width: 120px;
+}
+
+.tiny {
+  height: 35px;
+  width: 35px;
+}
+
+.buttonContainer {
+  height: 100px;
+  margin: 0px;
+  padding: 0px;
+  padding-right: 10px;
+  float: left;
+}
+
+#navigation {
+  width: 240px;
+  border-right: 8px solid #aaa;
+}
+
+#colors {
+  width: 100px;
+  border-right: 0px;
+}
+
+.sliders {
+  width: 140px;
+  height: 100px;
+  padding-top: 10px;
+}
+
+.sliders form {
+  margin: 0px;
+  padding: 0px;
+  clear: left;
+}
+
+.sliders form input {
+  width: 50px;
+  margin-left: 10px;
+  padding: 0px;
+  float: left;
+}
+
+.sliders form p {
+  float: left;
+  width: 10px;
+  font-family: Calibri;
+}
+
+#primaryColor {
+  position: relative;
+  top: -45px;
+  left: 10px;
+  width: 55px;
+  height: 55px;
+  border: 5px #fff groove;
+  background-color: rgb(0,0,0);
+  z-index: 2;
+}
+
+#secondaryColor {
+  position: relative;
+  top: 35px;
+  left: 35px;
+  width: 55px;
+  height: 55px;
+  border: 5px #fff groove;
+  background-color: rgb(0,0,255);
+  z-index: 1;
+}
+
+#colorPicker {
+  width: 100px;
+}
+
+#colorPicker canvas {
+  width: 84x;
+  height: 84px;
+  background-color: #fff;
+  margin-left: 4px;
+  margin-top: 10px;
+  padding: 0px;
+  border: 1px solid #aaa;
+  cursor: crosshair;
+}
+
+#toolOptions {
+  width: 320px;
+  border-right: 8px solid #aaa;
+  border-left: 8px solid #aaa;
+}
+
+#export {
+  width: 150px;
+  border-right: 8px solid #aaa;
+}
+
+#sharing {
+  width: 200px;
+  border-right: 8px solid #aaa;
+}
+
+#sharing p {
+  height: 25px;
+  margin: 0px;
+  margin-left: 10px;
+  margin-top: 20px;
+  padding: 0px;
+  text-align: center;
+  font-size: 14px;
+  font-family: Tahoma;
+  font-weight: 700;
+}
+
+#sideBar {
+  position: absolute;
+  width: 108px;
+  top: 116px;
+  bottom: 0px;
+  text-align: center;
+  background-color: #ddd;
+  border-left: 8px solid #aaa;
+  border-right: 4px solid #aaa;
+}
+
+#sideBar .btn:focus {
+  outline: none;
+}
+
+#mainCanvas {
+  position: absolute;
+  top: 116px;
+  left: 108px;
+  background-color: #fff;
+}

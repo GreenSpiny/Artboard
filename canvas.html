@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+  
+    <title>Collective Canvas</title>
+  
+    <!-- JQuery -->
+    <script src="resources/jquery-2.1.4.min.js" type="text/javascript"></script>
+    
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js" type="text/javascript"></script>
+    
+    <!-- Boostrap -->
+    <link href="resources/bootstrap-3.3.6-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    
+    <!-- TinyColor -->
+    <script src="resources/tinycolor.js"></script>
+    
+    <!-- Custom Files ---> 
+    <link href="resources/canvasStyle.css" rel="stylesheet" type="text/css">
+    <script src="resources/canvasUI.js" type="text/javascript"></script>
+  
+  </head>
+
+  <body>
+
+    <div id="topBar">
+    
+      <div id="navigation" class="buttonContainer">
+        <button id="homeBTN" class="square btn btn-info">Home</button>
+        <button id="accountBTN" class="rect btn btn-info">My Account</button>
+        <button id="helpBTN" class="rect btn btn-info">Help</button>
+      </div>
+      
+      <div id="colors" class="buttonContainer">
+        <div id="secondaryColor"></div>
+        <div id="primaryColor"></div>
+      </div>
+      
+      <div id="RGBsliders" class="buttonContainer sliders">
+        <form id="redForm">
+          <p>R:</p>
+          <input id="redSlider" class="rangeInput" type="range" step=1 min=0 max=255 value=0></input>
+          <input id="redNumber" class="numberInput" type="number" min=0 max=255 value=0></input>
+        </form>
+        <form id="greenForm">
+          <p>G:</p>
+          <input id="greenSlider" class="rangeInput" type="range" step=1 min=0 max=255 value=0></input>
+          <input id="greenNumber" class="numberInput" type="number" min=0 max=255 value=0></input>
+        </form>
+        <form id="blueForm">
+          <p>B:</p>
+          <input id="blueSlider" class="rangeInput" type="range" step=1 min=0 max=255 value=0></input>
+          <input id="blueNumber" class="numberInput" type="number" min=0 max=255 value=0></input>
+        </form>
+      </div>
+      
+      <div id="HSVsliders" class="buttonContainer sliders">
+        <form id="hueForm">
+          <p>H:</p>
+          <input id="hueSlider" class="rangeInput" type="range" step=1 min=0 max=360 value=0></input>
+          <input id="hueNumber" class="numberInput" type="number" min=0 max=360 value=0></input>
+        </form>
+        <form id="saturationForm">
+          <p>S:</p>
+          <input id="saturationSlider" class="rangeInput" type="range" step=1 min=0 max=100 value=0></input>
+          <input id="saturationNumber" class="numberInput" type="number" min=0 max=100 value=0></input>
+        </form>
+        <form id="valueForm">
+          <p>V:</p>
+          <input id="valueSlider" class="rangeInput" type="range" step=1 min=0 max=100 value=0></input>
+          <input id="valueNumber" class="numberInput" type="number" min=0 max=100 value=0></input>
+        </form>
+      </div>
+      
+      <div id="colorPicker" class="buttonContainer">
+        <canvas id="colorCanvas" width="84" height="84"></canvas>
+      </div>
+      
+      <div id="toolOptions" class="buttonContainer">
+      
+      </div>
+      
+      <div id="export" class="buttonContainer">
+        <button id="accountBTN" class="rect btn btn-info">Save</button>
+        <button id="helpBTN" class="rect btn btn-info">Export</button>
+      </div>
+      
+      <div id="sharing" class="buttonContainer">
+        <p>Share and collaborate!</p>
+        <button id="facebookBTN" class="tiny btn btn-default">
+          <img src="resources/images/FacebookIcon.png"></img>
+        </button>
+        <button id="twitterBTN" class="tiny btn btn-default">
+          <img src="resources/images/TwitterIcon.png"></img>
+        </button>
+        <button id="deviantartBTN" class="tiny btn btn-default">
+          <img src="resources/images/DeviantIcon.png"></img>
+        </button>
+        <button id="emailBTN" class="tiny btn btn-default">
+          <img src="resources/images/EmailIcon.png"></img>
+        </button>
+      </div>
+      
+    </div>
+  
+    <div id="sideBar">
+      <button id="rectangleBTN" custom="crosshair" class="tiny btn btn-default"></button>
+      <button id="circleBTN" custom="crosshair" class="tiny btn btn-default"></button>
+      <button id="brushBTN" custom="" class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button id="moveBTN" custom="move" class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+      <button class="tiny btn btn-default"></button>
+    </div>
+    
+    <canvas id="mainCanvas" width="1080" height="600"></canvas>
+  
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="resources/bootstrap-3.3.6-dist/js/bootstrap.min.js" type="text/javascript"></script>
+  
+  </body>
+
+</html>
