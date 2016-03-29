@@ -1,0 +1,13 @@
+body {
+	padding-top: 80px;
+}
+
+h1 {
+	font-size: 400%;
+	text-align: center;
+}
+
+.carousel-control {
+  padding-top:10%;
+  width:5%;
+}
