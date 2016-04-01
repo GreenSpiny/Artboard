@@ -95,11 +95,11 @@ $(document).ready(function(){
  
   // Click side buttons
   $("#sideBar .btn").click(function(){
-  $("#sideBar .btn").each(function() {
-    $(this).removeClass("active");
-  });
+    $("#sideBar .btn").each(function() {
+      $(this).removeClass("active");
+    });
     $(this).addClass("active");
-    $(this).blur();
+    $(this).tooltip("hide");
   });
   
   // Color picker functionality
@@ -129,16 +129,19 @@ $(document).ready(function(){
       imageString = "resources/images/" + image + ".png";
       $(this).html("<img src=" + imageString + "></img>");
     }
+    $(this).tooltip({delay: {show: 500, hide: 50}}); 
   });
   
   // Set tool button click functionality
   $("#sideBar .btn").click(function(){
     var image = $(this).attr("id");
+    var xOffset = $(this).attr("x");
+    var yOffset = $(this).attr("y");
     if ($(this).attr("custom") != "") {
       cursorString = $(this).attr("custom");
     }
     else {
-      cursorString = "url(resources/images/" + image + "_cursor.png), auto";
+      cursorString = "url(resources/images/" + image + "_cursor.png) " + xOffset + " " + yOffset + ", auto";
     }
   });
   

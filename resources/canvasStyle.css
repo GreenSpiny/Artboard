@@ -42,6 +42,16 @@ body {
 #navigation {
   width: 240px;
   border-right: 8px solid #aaa;
+  background-color: #none;
+}
+
+.rect span {
+  float: right;
+  margin-right: 10px;
+}
+
+#colors, #RGBsliders, #HSVsliders, #colorPicker {
+  background-color: none;
 }
 
 #colors {
