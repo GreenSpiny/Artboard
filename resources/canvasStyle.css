@@ -91,7 +91,7 @@ body {
   left: 10px;
   width: 55px;
   height: 55px;
-  border: 2px #fff solid;
+  border: 2px #fafafa solid;
   outline: 3px #aaa solid;
   background-color: rgb(0,0,0);
   z-index: 2;
@@ -103,7 +103,7 @@ body {
   left: 35px;
   width: 55px;
   height: 55px;
-  border: 2px #fff solid;
+  border: 2px #fafafa solid;
   outline: 3px #aaa solid;
   background-color: rgb(0,0,255);
   z-index: 1;
