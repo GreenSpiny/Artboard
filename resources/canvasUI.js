@@ -17,6 +17,11 @@ cursorString = "";  // String signifying cursor image
 
 // -------- Document Ready -------- //
 
+// Close browser window
+window.onbeforeunload = function() {
+  return "If all instances of this drawing are closed, unsaved changes will be lost.";
+};
+
 $(document).ready(function(){
   
   colorCanvas = document.getElementById("colorCanvas");
