@@ -1,13 +1,36 @@
 body {
-	padding-top: 80px;
+	padding-top: 100px;
 }
+
+#homepage_logged_out {
+	background-image: url('./homepage_logged_out.png');
+	background-repeat: no-repeat;
+	background-position: center 10%;
+}
+
+#homepage_logged_in {
+	background-image: url('./homepage_logged_in.png');
+	background-repeat: no-repeat;
+	background-position: center 10%;
+}
+
+.canvas_text {
+	background-image: url('./background_canvas.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 
 h1 {
 	font-size: 400%;
 	text-align: center;
 }
 
-.carousel-control {
-  padding-top:10%;
-  width:5%;
+.background_canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	border-color: black;
 }
