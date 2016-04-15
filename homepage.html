@@ -5,23 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CollaborART</title>
+    <title>CollaborArt</title>
 
     <!-- Boostrap -->
     <link href="resources/bootstrap-3.3.6-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+    <!-- Custom CSS File -->
     <link href="webapp.css" rel="stylesheet">
-
   </head>
-  <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <body id="homepage_logged_out">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-fixed-top" id="shadow_nav">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">CollaborArt</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="homepage.html">Home</a></li>
           <li><a href="#">Canvas</a></li>
           <li><a href="#">Help</a></li>
         </ul>
@@ -32,19 +38,19 @@
       </div>
     </nav>
 
+    <!-- Title and small description -->
     <div class="container">
       <div class="body">
-        <h1>CollaborART</h1>
-        <p class="lead" style="text-align:center;">
-          The quick brown fox jumps over the lazy dog.<br>
-          The quick brown fox jumps over the lazy dog.<br>
-          The quick brown fox jumps over the lazy dog.<br>
-          The quick brown fox jumps over the lazy dog.<br>
-          The quick brown fox jumps over the lazy dog.<br></p>
+        <h1 style="color: #5557fe; font-family: 'Indie Flower'">CollaborART</h1>
+        <p class="lead" style="text-align:center; font-family: 'Fjalla One', sans-serif;">
+          Welcome to the world of artful collaboration!<br>
+          Connect with friends to create fun<br>
+          and exciting masterpieces!</p>
       </div>
     </div>
 
-    <div class="container" style="padding-top:30px;">
+    <!-- Buttons and Input Boxes -->
+    <div class="container" style="padding-top:20px;">
       <div class="row">
         <form class="form-horizontal" role="form">
 
@@ -75,7 +81,6 @@
             <div class="col-md-2" >
               <a href="homepage_signed_in.html" class="btn btn-md btn-primary btn-block">Register</a>
             </div>
-
           </div>
         </form>
       </div>
@@ -109,5 +114,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
   </body>
 </html>
