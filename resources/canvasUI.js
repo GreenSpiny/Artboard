@@ -2,8 +2,14 @@ var TC = tinycolor("#000");
 
 var selection = "primaryColor";
 var inputReady = true;
-var mousePressed = false;
-var hueChanged = true;
+var hueChanged = true;  // True if the hue has been changed and the color picker must be regenerated
+var rOffset = 16;       // Position offset of the canvas resizer
+var mouseOnCanvas = false;
+
+var pickerPressed = false;  // True if the color picker has been pressed
+var toolsPressed = false;   // True if the toolbox dragger has been clicked
+var sizePressed = false;    // True if the canvas resizer has been clicked
+var oldMousePos = [0,0];    // Previous mouse position
 
 var pickerPos = [0,0];  // Coordinates on picker in percent (%)
 var pickerWidth = 84;   // Width of the picker canvas
@@ -29,12 +35,25 @@ $(document).ready(function(){
   adjustPicker();
   
   // Monitor mouse state
-  $(document).mousedown(function(){
-    mousePressed = true;
+  $("#colorPicker canvas").mousedown(function(event){
+    pickerPressed = true;
+    chooseColor(event);
+  });
+  
+  $("#sideBarHandle").mousedown(function(event){
+    toolsPressed = true;
+    oldMousePos = [event.clientX, event.clientY];
+  });
+  
+  $("#canvasResize").mousedown(function(event){
+    sizePressed = true;
+    oldMousePos = [event.clientX, event.clientY];
   });
 
   $(document).mouseup(function(){
-    mousePressed = false;
+    pickerPressed = false;
+    toolsPressed = false;
+    sizePressed = false;
   });
   
   // Select primary color
@@ -109,14 +128,64 @@ $(document).ready(function(){
   
   // Color picker functionality
   $("#colorPicker canvas").mousemove(function(event){
-    if (mousePressed) {
-      var xPos = event.clientX - $(this).offset().left;
-      var yPos = event.clientY - $(this).offset().top;;
-      pickerPos = [xPos / pickerWidth, 1 - (yPos / pickerWidth)];
-      TC = tinycolor("hsv " + $("#hueNumber").val().toString() + ", " + pickerPos[0].toString() + ", " + pickerPos[1].toString() + ")");
-      setValuesByInput("picker");
-    }
+    chooseColor(event);
   });
+  
+  // Drag toolbar
+  $(document).mousemove(function(event){
+    
+    var newMousePos = [event.clientX, event.clientY];
+    var distance = [newMousePos[0] - oldMousePos[0], newMousePos[1] - oldMousePos[1]];
+    mouseOnCanvas = canvasMouse(newMousePos[0],newMousePos[1]);
+    
+    if (toolsPressed) {
+      $("#sideBar").animate({ 
+        "left": "+=" + distance[0],
+        "top": "+=" + distance[1]
+      },0);
+    }
+    
+    else if (sizePressed && !mouseOnCanvas) {
+    
+      $("#canvasResize").animate({ 
+        "left": "+=" + distance[0],
+        "top": "+=" + distance[1]
+      },0);
+      
+      $("#canvasWidth").val(parseInt($("#canvasWidth").val()) + distance[0]*2);
+      $("#canvasHeight").val(parseInt($("#canvasHeight").val()) + distance[1]);
+      
+      $("#mainCanvas").css("width",$("#canvasWidth").val());
+      $("#mainCanvas").css("height",$("#canvasHeight").val());
+    }
+    
+    oldMousePos = newMousePos;
+  });
+  
+  // Resize canvas  
+  $("#canvasWidth").on("change",function() {
+    if ($(this).val() < 1) {
+      $(this).val(1);
+    }
+    else if ($(this).val() > parseInt($("#mainCanvas").attr("width"))) {
+      $(this).val($("#mainCanvas").attr("width"));
+    }
+    $("#mainCanvas").css("width",$(this).val());
+    setResize();
+  });
+  
+  $("#canvasHeight").on("change",function() {
+    if ($(this).val() < 1) {
+      $(this).val(1);
+    }
+    else if ($(this).val() > parseInt($("#mainCanvas").attr("height"))) {
+      $(this).val($("#mainCanvas").attr("height"));
+    }
+    $("#mainCanvas").css("height",$(this).val());
+    setResize();
+  });
+  
+  setResize();
   
   // Update picker color as needed
   adjustPicker();
@@ -157,9 +226,45 @@ $(document).ready(function(){
     }
   });
   
+  $("#canvasResize").mousemove(function(){
+    if (mouseOnCanvas) {
+       $(this).css("cursor",cursorString);
+    }
+    else {
+       $(this).css("cursor","pointer");
+    }
+  });
+  
 });
 
 // -------------------------------- //
+
+// Mouse on canvas - hard check
+function canvasMouse(x,y) {
+  return (
+    x >= $("#mainCanvas").position().left &&
+    x < $("#mainCanvas").position().left + parseInt($("#canvasWidth").val()) &&
+    y >= $("#mainCanvas").position().top &&
+    y < $("#mainCanvas").position().top + parseInt($("#canvasHeight").val())
+    );
+}
+
+// Reset canvas resize tool
+function setResize() {
+  $("#canvasResize").css("left",$("#mainCanvas").position().left + parseInt($("#canvasWidth").val()) - rOffset);
+  $("#canvasResize").css("top",$("#mainCanvas").position().top + parseInt($("#canvasHeight").val()) - rOffset);
+}
+
+// Color picker selection
+function chooseColor(event) {
+  if (pickerPressed) {
+    var xPos = event.clientX - $("#colorPicker canvas").offset().left;
+    var yPos = event.clientY - $("#colorPicker canvas").offset().top;
+    pickerPos = [xPos / pickerWidth, 1 - (yPos / pickerWidth)];
+    TC = tinycolor("hsv " + $("#hueNumber").val().toString() + ", " + pickerPos[0].toString() + ", " + pickerPos[1].toString() + ")");
+    setValuesByInput("picker");
+  }
+}
 
 // Set slider and primary / secondary colors based on the TC object
 function setValuesByInput(method) {
@@ -195,11 +300,6 @@ function setValuesByInput(method) {
   inputReady = true;
   
   document.getElementById(selection).style.backgroundColor = TC.toRgbString();
-  
-  // if (hueChanged) {
-    // adjustPicker();
-    // hueChanged = false;
-  // }
 }
 
 // Set slider values by an existing primary or secondary color

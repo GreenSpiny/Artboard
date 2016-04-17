@@ -29,10 +29,10 @@
     <div id="topBar">
     
       <div id="navigation" class="buttonContainer">
-        <a href="homepage.html" target="_blank">
-          <button id="homeBTN" class="square btn btn-info">Home</button>
+        <a href="homepage.html">
+          <button id="homeBTN" class="square btn btn-info"></button>
         </a>
-        <a href="my_account.html" target="_blank">
+        <a href="my_account.html">
           <button id="accountBTN" class="rect btn btn-info">My Account<span class="glyphicon glyphicon-cog"></span></button>
         </a>
         <button id="helpBTN" class="rect btn btn-info">Help<span class="glyphicon glyphicon-question-sign"></span></button>
@@ -111,6 +111,7 @@
     </div>
   
     <div id="sideBar">
+      <div id="sideBarHandle"></div>
       <button id="rectangleBTN" custom="crosshair" x="0" y="0"  class="tiny btn btn-default" data-toggle="tooltip" title="select"></button>
       <button id="circleBTN" custom="crosshair" x="0" y="0"     class="tiny btn btn-default" data-toggle="tooltip" title="select"></button>
       <button id="brushBTN" custom="" x="0" y="0"               class="tiny btn btn-default" data-toggle="tooltip" title="brush"></button>
@@ -131,7 +132,19 @@
       <button id="zoomBTN" custom="" x="4" y="4"                class="tiny btn btn-default" data-toggle="tooltip" title="zoom"></button>
     </div>
     
-    <canvas id="mainCanvas" width="1080" height="600"></canvas>
+    <div id="layersBar">
+      
+    </div>
+    
+    <div id="canvasContainer">
+      <canvas id="mainCanvas" width="1920" height="1080"></canvas>
+      <div class="form-group">
+        <input id="canvasWidth" type="number" class="form-control input-sm" value=1080></input>
+        <p> x </p>
+        <input id="canvasHeight" type="number" class="form-control input-sm" value=600></input>
+      </form>
+    </div>
+    <div id="canvasResize"></div>
   
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -40,6 +40,12 @@ body {
   float: left;
 }
 
+#homeBTN {
+  background-image: url("images/collaborart_logo_small.png");
+  background-position: center;
+  border-color: #eee;
+}
+
 #navigation {
   width: 240px;
   border-right: 8px solid #aaa;
@@ -155,21 +161,76 @@ body {
 #sideBar {
   position: absolute;
   width: 108px;
-  top: 116px;
-  bottom: 0px;
+  top: 121px;
+  left: 5px;
   text-align: center;
   background-color: #ddd;
-  border-left: 8px solid #aaa;
-  border-right: 4px solid #aaa;
+  border: 4px solid #aaa;
+  padding-bottom: 10px;
+  z-index: 5;
+}
+
+#sideBarHandle {
+  height: 15px;
+  background-color: #bbb;
+  cursor: pointer;
 }
 
 #sideBar .btn:focus {
   outline: none;
 }
 
+#canvasContainer {
+  width: 100%;
+  text-align: center;
+}
+
+#canvasContainer input {
+  width: 50px;
+  height: 30px;
+  display: inline;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 5px;
+  appearance: none;
+  font-weight: 700;
+  z-index: 6;
+  position: relative;
+}
+
+#canvasContainer input::-webkit-outer-spin-button,
+#canvasContainer input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#canvasContainer p {
+  display: inline;
+  text-align: center;
+  line-height: 30px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
 #mainCanvas {
-  position: absolute;
-  top: 116px;
-  left: 108px;
+  display: inline;
   background-color: #fff;
+  width: 1080px;
+  height: 600px;
+  margin: 0px;
+  padding: 0px;
+  z-index: 1;
+}
+
+#canvasResize {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  margin: 0px;
+  z-index: 0;
+  background-image: url("images/resizeIcon.png");
 }
