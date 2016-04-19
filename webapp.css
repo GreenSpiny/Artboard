@@ -2,16 +2,31 @@ body {
 	padding-top: 100px;
 }
 
+/*
+body {
+	background-size: cover;
+}
+*/
+
 #homepage_logged_out {
 	background-image: url('./homepage_logged_out.png');
 	background-repeat: no-repeat;
 	background-position: center 10%;
+	background-size: cover;
 }
 
 #homepage_logged_in {
-	background-image: url('./homepage_logged_in.png');
+	background-image: url('./splatter.png');
 	background-repeat: no-repeat;
 	background-position: center 10%;
+	background-size: cover;
+}
+
+#my_account {
+	background-image: url('./splatter.png');
+	background-repeat: no-repeat;
+	background-position: center 10%;
+	background-size: cover;
 }
 
 .canvas_text {
@@ -33,4 +48,32 @@ h1 {
 	height: 100%;
 	width: 100%;
 	border-color: black;
+}
+
+p {
+	font-family: 'Fjalla One', sans-serif;
+}
+
+.image_overlay {
+	position: relative;
+	width: 100%;
+}
+
+h3 span {
+	font-family: 'Fjalla One', sans-serif;
+	position: absolute;
+	top: 90%;
+	left: 5%;
+	width: 90%;
+	text-align: center;
+	color: white; 
+	letter-spacing: -1px;  
+	background: rgba(0, 0, 0, 0.6);
+	padding: 5%;
+}
+
+.thumbnail_grid {
+  	max-height: 600px;
+  	overflow-y: auto;
+  	overflow-x: hidden;
 }
