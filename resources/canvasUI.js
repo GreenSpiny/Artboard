@@ -227,9 +227,15 @@ $(document).ready(function(){
     }
   });
   
-  // Run layer formatting code
-  
+  // Set initial layer values
   $(".layer").css("backgroundColor","#ddd");
+  layerObjects.push(new layerObject(1,0));
+  selectedLayerJS = layerObjects[0];
+  selectedLayerHTML = $("#" + selectedLayerJS.id);
+  $("#layerName").val(selectedLayerJS.id);
+  
+  // Run layer formatting code
+  initializeLayerUI();
   initializeLayers();
   
 });

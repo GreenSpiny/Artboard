@@ -323,11 +323,10 @@ body {
 
 #layerList span {
   text-align: center;
-  width: 89px;
-  margin-left: 5px;
-  margin-right: 5px;
+  width: 62px;
   display: block;
   line-height: 58px;
+  overflow: hidden;
 }
 
 #layerList span:hover {
