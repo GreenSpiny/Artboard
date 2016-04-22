@@ -32,6 +32,20 @@ body {
   width: 35px;
 }
 
+.micro {
+  height: 24px;
+  width: 24px;
+  margin: 0px;
+  padding: 12px;
+}
+
+.nano {
+  height: 18px;
+  width: 18px;
+  margin: 0px;
+  padding: 9px;
+}
+
 .buttonContainer {
   height: 100px;
   margin: 0px;
@@ -170,7 +184,17 @@ body {
   z-index: 5;
 }
 
-#sideBarHandle {
+#layersBar {
+  position: absolute;
+  width: 133px;
+  top: 121px;
+  right: 5px;
+  background-color: #ddd;
+  border: 4px solid #aaa;
+  z-index: 5;
+}
+
+#sideBarHandle, #layersBarHandle {
   height: 15px;
   background-color: #bbb;
   cursor: pointer;
@@ -197,6 +221,12 @@ body {
   font-weight: 700;
   z-index: 6;
   position: relative;
+}
+
+#layerOptions input::-webkit-outer-spin-button,
+#layerOptions input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #canvasContainer input::-webkit-outer-spin-button,
@@ -233,4 +263,80 @@ body {
   margin: 0px;
   z-index: 0;
   background-image: url("images/resizeIcon.png");
+}
+
+#layerOptions {
+  width: 125px;
+  text-align: center;
+  background-color: #eee;
+  padding-bottom: 5px;
+  padding-top: 1px;
+  margin: 0px;
+  border-bottom: 4px solid #aaa;
+}
+
+#layerOptions input, #layerOptions select {
+  font-family: Calibri;
+  text-align: center;
+}
+
+#layerName, #layerBlend {
+  width: 115px;
+  margin: 5px;
+  margin-bottom: 0px;
+  padding: 0px;
+  height: 21px;
+}
+
+#layerOpacityNumber {
+  width: 30px;
+  margin: 5px;
+  padding: 0px;
+  float: left;
+  height: 21px;
+}
+
+#layerOpacitySlider {
+  width: 80px;
+  padding: 0px;
+  margin: 5px;
+}
+
+#layerList {
+  height: 400px;
+  overflow: scroll;
+  margin: 0px;
+  padding: 0px;
+}
+
+#layerList .btn-group-vertical {
+  float: left;
+  margin: 5px;
+  padding: 0px;
+}
+
+#layerList .btn-group {
+  margin: 5px;
+  margin-top: 0px;
+  padding: 0px;
+}
+
+#layerList span {
+  text-align: center;
+  width: 89px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: block;
+  line-height: 58px;
+}
+
+#layerList span:hover {
+  cursor: pointer;
+}
+
+.layer {
+  margin: 0px;
+  padding: 0px;
+  background-color: #eee;
+  border-bottom: 4px solid #ccc;
 }

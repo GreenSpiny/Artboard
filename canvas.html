@@ -9,9 +9,6 @@
     <!-- JQuery -->
     <script src="resources/jquery-2.1.4.min.js" type="text/javascript"></script>
     
-    <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js" type="text/javascript"></script>
-    
     <!-- Boostrap -->
     <link href="resources/bootstrap-3.3.6-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     
@@ -20,6 +17,7 @@
     
     <!-- Custom Files ---> 
     <link href="resources/canvasStyle.css" rel="stylesheet" type="text/css">
+    <script src="resources/canvasLayers.js" type="text/javascript"></script>
     <script src="resources/canvasUI.js" type="text/javascript"></script>
   
   </head>
@@ -39,8 +37,8 @@
       </div>
       
       <div id="colors" class="buttonContainer">
-        <div id="secondaryColor"></div>
-        <div id="primaryColor"></div>
+        <div id="secondaryColor" class="colorBox"></div>
+        <div id="primaryColor" class="colorBox"></div>
       </div>
       
       <div id="RGBsliders" class="buttonContainer sliders">
@@ -111,7 +109,7 @@
     </div>
   
     <div id="sideBar">
-      <div id="sideBarHandle"></div>
+      <div id="sideBarHandle" pressed="0" class="handle"></div>
       <button id="rectangleBTN" custom="crosshair" x="0" y="0"  class="tiny btn btn-default" data-toggle="tooltip" title="select"></button>
       <button id="circleBTN" custom="crosshair" x="0" y="0"     class="tiny btn btn-default" data-toggle="tooltip" title="select"></button>
       <button id="brushBTN" custom="" x="0" y="0"               class="tiny btn btn-default" data-toggle="tooltip" title="brush"></button>
@@ -133,7 +131,38 @@
     </div>
     
     <div id="layersBar">
+      <div id="layersBarHandle" pressed="0" class="handle"></div>
+      <div id="layerOptions" class="form-group">
+        <input id="layerName" type="text" value="Layer 1" class="form-control"></input>
+        <input id="layerOpacityNumber" type="number" min=0 max=100 value=100 class="form-control"></input>
+        <input id="layerOpacitySlider" type="range" min=0 max=100 value=100 step=1></input>
+        <select id="layerBlend" class="form-control">
+          <option>Normal</option>
+          <option>Add</option>
+          <option>Subtract</option>
+          <option>Multiply</option>
+          <option>Overlay</option>
+          <option>XOR</option>
+        </select>
+      </div>
+      <div id="layerList">
       
+        <div id="layer1" class="layer">
+          <div class="btn-group-vertical">
+            <button type="button" class="micro btn btn-default visibility" data-toggle="tooltip" title="show / hide"></button>
+            <button type="button" class="micro btn btn-default lock" data-toggle="tooltip" title="lock layer"></button>
+          </div>
+          <span class="nameArea">Layer 1</span>
+          <div class="btn-group">
+            <button type="button" class="nano btn btn-default new"    data-toggle="tooltip" title="new"></button>
+            <button type="button" class="nano btn btn-default copy"   data-toggle="tooltip" title="copy"></button>
+            <button type="button" class="nano btn btn-default delete" data-toggle="tooltip" title="delete"></button>
+            <button type="button" class="nano btn btn-default move"   data-toggle="tooltip" title="move up"></button>
+            <button type="button" class="nano btn btn-default merge"  data-toggle="tooltip" title="merge down"></button>
+          </div>
+        </div>
+      
+      </div>
     </div>
     
     <div id="canvasContainer">
@@ -144,7 +173,7 @@
         <input id="canvasHeight" type="number" class="form-control input-sm" value=600></input>
       </form>
     </div>
-    <div id="canvasResize"></div>
+    <div id="canvasResize" pressed="0" class="handle"></div>
   
     <!-- Bootstrap core JavaScript
     ================================================== -->

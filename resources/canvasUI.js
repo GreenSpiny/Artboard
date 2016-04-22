@@ -1,24 +1,21 @@
 var TC = tinycolor("#000");
 
-var selection = "primaryColor";
 var inputReady = true;
 var hueChanged = true;  // True if the hue has been changed and the color picker must be regenerated
 var rOffset = 16;       // Position offset of the canvas resizer
 var mouseOnCanvas = false;
 
 var pickerPressed = false;  // True if the color picker has been pressed
-var toolsPressed = false;   // True if the toolbox dragger has been clicked
-var sizePressed = false;    // True if the canvas resizer has been clicked
 var oldMousePos = [0,0];    // Previous mouse position
 
 var pickerPos = [0,0];  // Coordinates on picker in percent (%)
 var pickerWidth = 84;   // Width of the picker canvas
+
 var colorCanvas;
 var colorContext;
 
 tempHue = 0;        // Store hue correctly
 tempSaturation = 0; // Store saturation correctly
-
 cursorString = "";  // String signifying cursor image
 
 // -------- Document Ready -------- //
@@ -40,38 +37,26 @@ $(document).ready(function(){
     chooseColor(event);
   });
   
-  $("#sideBarHandle").mousedown(function(event){
-    toolsPressed = true;
-    oldMousePos = [event.clientX, event.clientY];
-  });
-  
-  $("#canvasResize").mousedown(function(event){
-    sizePressed = true;
+  $(".handle").mousedown(function(event){
+    $(this).attr("pressed","1");
     oldMousePos = [event.clientX, event.clientY];
   });
 
   $(document).mouseup(function(){
     pickerPressed = false;
-    toolsPressed = false;
-    sizePressed = false;
+     $(".handle").each(function() {
+      $(this).attr("pressed","0");
+     });
   });
   
   // Select primary color
-  $("#primaryColor").click(function() {
-    document.getElementById("primaryColor").style.zIndex = "2";
-    document.getElementById("secondaryColor").style.zIndex = "1";
-    selection = "primaryColor";
+  $(".colorBox").click(function() {
+    $(".colorBox").each(function() {
+      $(this).css("zIndex",1);
+    });
+    $(this).css("zIndex",2);
     hueChanged = true;
-    setValuesByColor();
-  });
-  
-  // Select secondary color
-  $("#secondaryColor").click(function() {
-    document.getElementById("primaryColor").style.zIndex = "1";
-    document.getElementById("secondaryColor").style.zIndex = "2";
-    selection = "secondaryColor";
-    hueChanged = true;
-    setValuesByColor();
+    setValuesByColor($(this).attr("id"));
   });
   
   // Adjust hue
@@ -131,21 +116,28 @@ $(document).ready(function(){
     chooseColor(event);
   });
   
-  // Drag toolbar
+  // Drag toolbars
   $(document).mousemove(function(event){
     
     var newMousePos = [event.clientX, event.clientY];
     var distance = [newMousePos[0] - oldMousePos[0], newMousePos[1] - oldMousePos[1]];
     mouseOnCanvas = canvasMouse(newMousePos[0],newMousePos[1]);
     
-    if (toolsPressed) {
+    if ($("#sideBarHandle").attr("pressed") == "1") {
       $("#sideBar").animate({ 
         "left": "+=" + distance[0],
         "top": "+=" + distance[1]
       },0);
     }
     
-    else if (sizePressed && !mouseOnCanvas) {
+    else if ($("#layersBarHandle").attr("pressed") == "1") {
+      $("#layersBar").animate({ 
+        "right": "-=" + distance[0],
+        "top": "+=" + distance[1]
+      },0);
+    }
+    
+    else if ($("#canvasResize").attr("pressed") == "1" && !mouseOnCanvas) {
     
       $("#canvasResize").animate({ 
         "left": "+=" + distance[0],
@@ -235,6 +227,11 @@ $(document).ready(function(){
     }
   });
   
+  // Run layer formatting code
+  
+  $(".layer").css("backgroundColor","#ddd");
+  initializeLayers();
+  
 });
 
 // -------------------------------- //
@@ -299,12 +296,16 @@ function setValuesByInput(method) {
   
   inputReady = true;
   
-  document.getElementById(selection).style.backgroundColor = TC.toRgbString();
+  $(".colorBox").each(function() {
+    if ($(this).css("zIndex") == 2) {
+      $(this).css("backgroundColor",TC.toRgbString());
+    }
+  });
 }
 
 // Set slider values by an existing primary or secondary color
-function setValuesByColor() {
-  TC = tinycolor($("#" + selection).css("background-color"));
+function setValuesByColor(id) {
+  TC = tinycolor($("#" + id).css("background-color"));
   setValuesByInput();
 }
 
