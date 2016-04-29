@@ -17,6 +17,7 @@
     
     <!-- Custom Files ---> 
     <link href="resources/canvasStyle.css" rel="stylesheet" type="text/css">
+    <script src="resources/canvasDrawing.js" type="text/javascript"></script>
     <script src="resources/canvasLayers.js" type="text/javascript"></script>
     <script src="resources/canvasUI.js" type="text/javascript"></script>
   
@@ -109,29 +110,29 @@
     </div>
   
     <div id="sideBar">
-      <div id="sideBarHandle" pressed="0" class="handle"></div>
-      <button id="rectangleBTN" custom="crosshair" x="0" y="0"  class="tiny btn btn-default" data-toggle="tooltip" title="select"></button>
-      <button id="circleBTN" custom="crosshair" x="0" y="0"     class="tiny btn btn-default" data-toggle="tooltip" title="select"></button>
-      <button id="brushBTN" custom="" x="0" y="0"               class="tiny btn btn-default" data-toggle="tooltip" title="brush"></button>
-      <button id="pencilBTN" custom="" x="0" y="0"              class="tiny btn btn-default" data-toggle="tooltip" title="pencil"></button>
-      <button id="airbrushBTN" custom="" x="4" y="4"            class="tiny btn btn-default" data-toggle="tooltip" title="airbrush"></button>
-      <button id="eraserBTN" custom="" x="4" y="4"              class="tiny btn btn-default" data-toggle="tooltip" title="eraser"></button>
-      <button id="bucketBTN" custom="" x="1" y="26"             class="tiny btn btn-default" data-toggle="tooltip" title="fill"></button>
-      <button id="dropperBTN" custom="" x="0" y="22"            class="tiny btn btn-default" data-toggle="tooltip" title="dropper"></button>
-      <button id="moveBTN" custom="" x="16" y="16"              class="tiny btn btn-default" data-toggle="tooltip" title="move"></button>
-      <button id="rotateBTN" custom="" x="4" y="4"              class="tiny btn btn-default" data-toggle="tooltip" title="rotate"></button>
-      <button id="scaleBTN" custom="" x="10" y="10"             class="tiny btn btn-default" data-toggle="tooltip" title="scale"></button>
-      <button id="skewBTN" custom="" x="13" y="5"               class="tiny btn btn-default" data-toggle="tooltip" title="skew"></button>
-      <button id="blurBTN" custom="" x="11" y="11"              class="tiny btn btn-default" data-toggle="tooltip" title="blur"></button>
-      <button id="smudgeBTN" custom="" x="14" y="15"            class="tiny btn btn-default" data-toggle="tooltip" title="smudge"></button>
-      <button id="gradientBTN" custom="" x="4" y="4"            class="tiny btn btn-default" data-toggle="tooltip" title="gradient"></button>
-      <button id="textBTN" custom="" x="4" y="4"                class="tiny btn btn-default" data-toggle="tooltip" title="text"></button>
-      <button id="panBTN" custom="" x="13" y="14"               class="tiny btn btn-default" data-toggle="tooltip" title="pan"></button>
-      <button id="zoomBTN" custom="" x="4" y="4"                class="tiny btn btn-default" data-toggle="tooltip" title="zoom"></button>
+      <div id="sideBarHandle" pressed="0" class="handle">Tools</div>
+      <button id="rectangleBTN" custom="crosshair" x="0" y="0"  class="tiny btn btn-default" index="0"  data-toggle="tooltip" title="select"></button>
+      <button id="circleBTN" custom="crosshair" x="0" y="0"     class="tiny btn btn-default" index="1"  data-toggle="tooltip" title="select"></button>
+      <button id="brushBTN" custom="" x="0" y="0"               class="tiny btn btn-default" index="2"  data-toggle="tooltip" title="brush"></button>
+      <button id="pencilBTN" custom="" x="0" y="0"              class="tiny btn btn-default" index="3"  data-toggle="tooltip" title="pencil"></button>
+      <button id="airbrushBTN" custom="" x="4" y="4"            class="tiny btn btn-default" index="4"  data-toggle="tooltip" title="airbrush"></button>
+      <button id="eraserBTN" custom="" x="4" y="4"              class="tiny btn btn-default" index="5"  data-toggle="tooltip" title="eraser"></button>
+      <button id="bucketBTN" custom="" x="1" y="26"             class="tiny btn btn-default" index="6"  data-toggle="tooltip" title="fill"></button>
+      <button id="dropperBTN" custom="" x="0" y="22"            class="tiny btn btn-default" index="7"  data-toggle="tooltip" title="dropper"></button>
+      <button id="moveBTN" custom="" x="16" y="16"              class="tiny btn btn-default" index="8"  data-toggle="tooltip" title="move"></button>
+      <button id="rotateBTN" custom="" x="4" y="4"              class="tiny btn btn-default" index="9"  data-toggle="tooltip" title="rotate"></button>
+      <button id="scaleBTN" custom="" x="10" y="10"             class="tiny btn btn-default" index="10" data-toggle="tooltip" title="scale"></button>
+      <button id="skewBTN" custom="" x="13" y="5"               class="tiny btn btn-default" index="11" data-toggle="tooltip" title="skew"></button>
+      <button id="blurBTN" custom="" x="11" y="11"              class="tiny btn btn-default" index="12" data-toggle="tooltip" title="blur"></button>
+      <button id="smudgeBTN" custom="" x="14" y="15"            class="tiny btn btn-default" index="13" data-toggle="tooltip" title="smudge"></button>
+      <button id="gradientBTN" custom="" x="4" y="4"            class="tiny btn btn-default" index="14" data-toggle="tooltip" title="gradient"></button>
+      <button id="textBTN" custom="" x="4" y="4"                class="tiny btn btn-default" index="15" data-toggle="tooltip" title="text"></button>
+      <button id="panBTN" custom="" x="13" y="14"               class="tiny btn btn-default" index="16" data-toggle="tooltip" title="pan"></button>
+      <button id="zoomBTN" custom="" x="4" y="4"                class="tiny btn btn-default" index="17" data-toggle="tooltip" title="zoom"></button>
     </div>
     
     <div id="layersBar">
-      <div id="layersBarHandle" pressed="0" class="handle"></div>
+      <div id="layersBarHandle" pressed="0" class="handle">Layers</div>
       <div id="layerOptions" class="form-group">
         <input id="layerName" type="text" value="Layer_1" class="form-control"></input>
         <input id="layerOpacityNumber" type="number" min=0 max=100 value=100 class="form-control"></input>
@@ -149,16 +150,16 @@
       
         <div id="Layer_1" class="layer">
           <div class="btn-group-vertical">
-            <button type="button" class="micro btn btn-default visibility" data-toggle="tooltip" title="show / hide"></button>
-            <button type="button" class="micro btn btn-default lock" data-toggle="tooltip" title="lock layer"></button>
+            <button type="button" num="0" id="Layer_Visibility" class="micro btn btn-default visibility" data-toggle="tooltip" title="hide layer"></button>
+            <button type="button" num="1" id="Layer_Lock_Off" class="micro btn btn-default lock" data-toggle="tooltip" title="lock layer"></button>
           </div>
           <span class="nameArea">Layer_1</span>
           <div class="btn-group">
-            <button type="button" class="nano btn btn-default new"    data-toggle="tooltip" title="new"></button>
-            <button type="button" class="nano btn btn-default copy"   data-toggle="tooltip" title="copy"></button>
-            <button type="button" class="nano btn btn-default delete" data-toggle="tooltip" title="delete"></button>
-            <button type="button" class="nano btn btn-default move"   data-toggle="tooltip" title="move up"></button>
-            <button type="button" class="nano btn btn-default merge"  data-toggle="tooltip" title="merge down"></button>
+            <button type="button" num="2" id="Layer_New" class="nano btn btn-default new"    data-toggle="tooltip" title="new"></button>
+            <button type="button" num="3" id="Layer_Copy" class="nano btn btn-default copy"   data-toggle="tooltip" title="duplicate"></button>
+            <button type="button" num="4" id= "Layer_Delete" class="nano btn btn-default delete" data-toggle="tooltip" title="delete"></button>
+            <button type="button" num="5" id="Layer_Move" class="nano btn btn-default move"   data-toggle="tooltip" title="move up"></button>
+            <button type="button" num="6" id="Layer_Merge" class="nano btn btn-default merge"  data-toggle="tooltip" title="merge down"></button>
           </div>
         </div>
       
@@ -169,8 +170,10 @@
       <canvas id="mainCanvas" width="1920" height="1080"></canvas>
       <div class="form-group">
         <input id="canvasWidth" type="number" class="form-control input-sm" value=1080></input>
-        <p> x </p>
+        <p>px</p>
+        <p id="breakSymbol">|</p>
         <input id="canvasHeight" type="number" class="form-control input-sm" value=600></input>
+        <p>px</p>
       </form>
     </div>
     <div id="canvasResize" pressed="0" class="handle"></div>

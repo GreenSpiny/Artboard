@@ -1,11 +1,12 @@
 var TC = tinycolor("#000");
 
-var inputReady = true;
-var hueChanged = true;  // True if the hue has been changed and the color picker must be regenerated
-var rOffset = 16;       // Position offset of the canvas resizer
-var mouseOnCanvas = false;
+var inputReady = true;      // True if the color picking tools are ready for new input
+var hueChanged = true;      // True if the hue has been changed and the color picker must be regenerated
+var rOffset = 16;           // Position offset of the canvas resizer
+var mouseOnCanvas = false;  // True if the mouse is over the canvas
 
 var pickerPressed = false;  // True if the color picker has been pressed
+var canvasPressed = false;  // True if the drawing canvas has been pressed
 var oldMousePos = [0,0];    // Previous mouse position
 
 var pickerPos = [0,0];  // Coordinates on picker in percent (%)
@@ -14,8 +15,12 @@ var pickerWidth = 84;   // Width of the picker canvas
 var colorCanvas;
 var colorContext;
 
+var mainCanvas;
+var mainContext;
+
 tempHue = 0;        // Store hue correctly
 tempSaturation = 0; // Store saturation correctly
+tempValue = 0;      // Store value correctly
 cursorString = "";  // String signifying cursor image
 
 // -------- Document Ready -------- //
@@ -31,10 +36,21 @@ $(document).ready(function(){
   colorContext = colorCanvas.getContext("2d");
   adjustPicker();
   
+  mainCanvas = document.getElementById("mainCanvas");
+  mainContext = mainCanvas.getContext("2d");
+  initializeContext(mainContext);
+  
   // Monitor mouse state
   $("#colorPicker canvas").mousedown(function(event){
     pickerPressed = true;
     chooseColor(event);
+  });
+  
+  $("#mainCanvas").mousedown(function(event){
+    canvasPressed = true;
+    canvasPos = $("#mainCanvas").offset();
+    console.log(canvasPos);
+    pointsArray.push({x: event.clientX, y: event.clientY});
   });
   
   $(".handle").mousedown(function(event){
@@ -44,6 +60,8 @@ $(document).ready(function(){
 
   $(document).mouseup(function(){
     pickerPressed = false;
+    canvasPressed = false;
+    pointsArray = [];
      $(".handle").each(function() {
       $(this).attr("pressed","0");
      });
@@ -88,6 +106,7 @@ $(document).ready(function(){
       TC = tinycolor("hsv " + $("#hueSlider").val().toString() + ", " + ($("#saturationSlider").val()/100.0).toString() + ", " + ($("#valueSlider").val()/100.0).toString() + ")");
       tempHue = $("#hueSlider").val();
       tempSaturation = $("#saturationSlider").val();
+      tempValue = $("#valueSlider").val();
       setValuesByInput("hsv");
     }
  });
@@ -98,6 +117,7 @@ $(document).ready(function(){
       TC = tinycolor("hsv " + $("#hueNumber").val().toString() + ", " + $("#saturationNumber").val().toString() + ", " + $("#valueNumber").val().toString() + ")");
       tempHue = $("#hueNumber").val();
       tempSaturation = $("#saturationNumber").val();
+      tempValue = $("#valueSlider").val();
       setValuesByInput("hsv");
     }
  });
@@ -283,21 +303,23 @@ function setValuesByInput(method) {
 
 
   var hsv = TC.toHsv();
-  $("#valueSlider").val(Math.round(hsv.v * 100.0));
-  $("#valueNumber").val(Math.round(hsv.v * 100.0));
 
   if (method == "hsv") {
     $("#hueSlider").val(tempHue); 
     $("#saturationSlider").val(tempSaturation);
+    $("#valueSlider").val(tempValue);
     $("#hueNumber").val(tempHue);
     $("#saturationNumber").val(tempSaturation);
+    $("#valueNumber").val(tempValue);
   }
   
   else {
     $("#hueSlider").val(Math.round(hsv.h)); 
     $("#saturationSlider").val(Math.round(hsv.s * 100.0));
+    $("#valueSlider").val(Math.round(hsv.v * 100.0));
     $("#hueNumber").val(Math.round(hsv.h));
     $("#saturationNumber").val(Math.round(hsv.s * 100.0));
+    $("#valueNumber").val(Math.round(hsv.v * 100.0));
   }
   
   inputReady = true;

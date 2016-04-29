@@ -1,5 +1,12 @@
 body {
   background-color: #ddd;
+  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #topBar {
@@ -35,15 +42,27 @@ body {
 .micro {
   height: 24px;
   width: 24px;
+  padding: 0px;
   margin: 0px;
-  padding: 12px;
 }
 
 .nano {
   height: 18px;
   width: 18px;
+}
+
+.layer .nano img {
+  padding: 0px;
   margin: 0px;
-  padding: 9px;
+  top: -2px;
+  position: relative;
+}
+
+.btn-group-vertical {
+  width: 24px;
+  height: 48px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .buttonContainer {
@@ -238,9 +257,14 @@ body {
 #canvasContainer p {
   display: inline;
   text-align: center;
-  line-height: 30px;
-  margin-left: 3px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#breakSymbol {
+  margin-left: 5px;
   margin-right: 3px;
+  font-size: 16px;
 }
 
 #mainCanvas {
@@ -263,6 +287,15 @@ body {
   margin: 0px;
   z-index: 0;
   background-image: url("images/resizeIcon.png");
+}
+
+.handle {
+  text-align: center;
+  font-family: "Calibri", sans-serif;
+  font-size: 10px;
+  color: #fff;
+  letter-spacing: 3px;
+  padding-left: 3px;
 }
 
 #layerOptions {
@@ -339,3 +372,4 @@ body {
   background-color: #eee;
   border-bottom: 4px solid #ccc;
 }
+

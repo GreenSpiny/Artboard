@@ -9,6 +9,8 @@ function layerObject(number,position) {
   this.opacity = 100;
   this.blendMode = "Normal";
   this.position = position;
+  this.visible = true;
+  this.locked = false;
 }
 
 function initializeLayers() {
@@ -22,44 +24,118 @@ function initializeLayers() {
     selectedLayerHTML = $(this).parent();
     selectedLayerHTML.css("backgroundColor","#ddd");
     
-    for (var i = 0; i < layerObjects.length; i++) {
-      var current = layerObjects[i];
-      if (current.id == selectedLayerHTML.attr("id")) {
-        selectedLayerJS = current;
-        break;
-      }
-    }
+    getLayerJS();
+    
     $("#layerName").val(selectedLayerJS.name);
     $("#layerOpacityNumber").val(selectedLayerJS.opacity);
     $("#layerOpacitySlider").val(selectedLayerJS.opacity);
     $("#layerBlend").val(selectedLayerJS.blendMode);
     
+    $("#layerName").focus();
+    
   });
   
-  // Create new layers
-  $(".layer .new").click(function() {
+  // Press layer buttons
+  $(".layer button").click(function() {
+    selectedLayerHTML = $(this).parent().parent();
+    getLayerJS();
+    var type = $(this).attr("num");
+    
+    // Toggle layer visibility
+    if (type == "0") {
+      selectedLayerJS.visible = !selectedLayerJS.visible;
+      if (!selectedLayerJS.visible) {
+        $(this).attr("id","Layer_Visibility_Off");
+        $(this).attr("title","show layer");
+      }
+      else {
+        $(this).attr("id","Layer_Visibility");
+        $(this).attr("title","hide layer");
+      }
+    }
+    
+    // Toggle layer lock
+    else if (type == "1") {
+      selectedLayerJS.locked = !selectedLayerJS.locked;
+      if (!selectedLayerJS.locked) {
+        $(this).attr("id","Layer_Lock_Off");
+        $(this).attr("title","lock layer");
+      }
+      else {
+        $(this).attr("id","Layer_Lock");
+        $(this).attr("title","unlock layer");
+      }
+    }
+    
+    // Create new layers
+    else if (type == "2") {
+      makeLayer("Layer_" + layerNum.toString());
+    }
+    
+    // Duplicate layer
+    else if (type == "3") {
+    
+    }
+    
+    // Delete layer
+    else if (type == "4") {
+    
+    }
+    
+    // Move layer
+    else if (type == "5") {
+    
+    }
+    
+    // Merge layer
+    else if (type == "6") {
+    
+    }
+    
+    
+    imageString = "resources/images/" + $(this).attr("id") + ".png";
+    $(this).html("<img src=" + imageString + "></img>");
+  });
+  
+  // Set button images
+  $(".layer button").each(function() {
+      imageString = "resources/images/" + $(this).attr("id") + ".png";
+      $(this).html("<img src=" + imageString + "></img>");
+  });
+
+};
+
+function getLayerJS() {
+  for (var i = 0; i < layerObjects.length; i++) {
+    var current = layerObjects[i];
+    if (current.id == selectedLayerHTML.attr("id")) {
+      selectedLayerJS = current;
+      break;
+    }
+  }
+};
+
+function makeLayer(name) {
     var string = $("#layerList").html();
-    string += '<div id="Layer_' + layerNum.toString() + '" class="layer">'
+    string += '<div id="' + name + '" class="layer">'
     string += ' <div class="btn-group-vertical">'
-    string += '   <button type="button" class="micro btn btn-default visibility" data-toggle="tooltip" title="show / hide"></button>'
-    string += '   <button type="button" class="micro btn btn-default lock" data-toggle="tooltip" title="lock layer"></button>'
+    string += '   <button type="button" num="0" id="Layer_Visibility" class="micro btn btn-default visibility" data-toggle="tooltip" title="show / hide"></button>'
+    string += '   <button type="button" num="1" id="Layer_Lock_Off" class="micro btn btn-default lock" data-toggle="tooltip" title="lock layer"></button>'
     string += ' </div>'
-    string += ' <span class="nameArea">Layer_'+ layerNum.toString() + '</span>'
+    string += ' <span class="nameArea">' + name + '</span>'
     string += ' <div class="btn-group">'
-    string += '   <button type="button" class="nano btn btn-default new"    data-toggle="tooltip" title="new"></button>'
-    string += '   <button type="button" class="nano btn btn-default copy"   data-toggle="tooltip" title="copy"></button>'
-    string += '   <button type="button" class="nano btn btn-default delete" data-toggle="tooltip" title="delete"></button>'
-    string += '   <button type="button" class="nano btn btn-default move"   data-toggle="tooltip" title="move up"></button>'
-    string += '   <button type="button" class="nano btn btn-default merge"  data-toggle="tooltip" title="merge down"></button>'
+    string += '   <button type="button" num="2" id="Layer_New" class="nano btn btn-default new"    data-toggle="tooltip" title="new"></button>'
+    string += '   <button type="button" num="3" id="Layer_Copy" class="nano btn btn-default copy"   data-toggle="tooltip" title="copy"></button>'
+    string += '   <button type="button" num="4" id="Layer_Delete" class="nano btn btn-default delete" data-toggle="tooltip" title="delete"></button>'
+    string += '   <button type="button" num="5" id="Layer_Move" class="nano btn btn-default move"   data-toggle="tooltip" title="move up"></button>'
+    string += '   <button type="button" num="6" id="Layer_Merge" class="nano btn btn-default merge"  data-toggle="tooltip" title="merge down"></button>'
     string += ' </div>'
     string += '</div>';
     $("#layerList").html(string);
     layerObjects.push(new layerObject(layerNum,0));
     initializeLayers();
     layerNum ++;
-  });
-
-};
+}
 
 function initializeLayerUI() {
 
