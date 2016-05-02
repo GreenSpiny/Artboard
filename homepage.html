@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
 
     <!-- Custom CSS File -->
-    <link href="webapp.css" rel="stylesheet">
+    <link href="./resources/webapp.css" rel="stylesheet">
   </head>
 
   <body id="homepage_logged_out">
@@ -31,10 +31,6 @@
           <li><a href="canvas.html">Canvas</a></li>
           <li><a href="#">Help</a></li>
         </ul>
-        <!-- <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-        </ul> -->
       </div>
     </nav>
 
@@ -76,10 +72,10 @@
           </div>
 
             <div class="col-md-2 col-md-offset-4" >
-              <input type="sign_in" class="btn btn-md btn-success btn-block" value="Sign In">
+              <input type="sign_in" class="btn btn-md btn-success btn-block" value="Sign In" id="sign_in">
             </div>
             <div class="col-md-2" >
-              <a href="homepage_signed_in.html" class="btn btn-md btn-primary btn-block">Register</a>
+              <a href="homepage_registered.html" class="btn btn-md btn-primary btn-block">Register</a>
             </div>
           </div>
         </form>
@@ -114,6 +110,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      document.getElementById("sign_in").onclick = function() {
+        window.location.href = 'homepage_signed_in.html';
+      };
+    </script>
 
   </body>
 </html>

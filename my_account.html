@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
 
     <!-- Custom CSS File -->
-    <link href="webapp.css" rel="stylesheet">
+    <link href="./resources/webapp.css" rel="stylesheet">
   </head>
 
   <body id="my_account">
@@ -23,10 +23,10 @@
     <nav class="navbar navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="homepage.html">CollaborArt</a>
+          <a class="navbar-brand" href="homepage_signed_in.html">CollaborArt</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="homepage.html">Home</a></li>
+          <li><a href="homepage_signed_in.html">Home</a></li>
           <li><a href="canvas.html">Canvas</a></li>
           <li class="active"><a href="my_account.html">My Account</a></li>
           <li><a href="manage_drawings.html">Manage Drawings</a></li> 
@@ -46,7 +46,7 @@
       <div class="container">
         <div class="body">
           <h1 style="color: #5557fe; font-family: 'Indie Flower'">My Account</h1>
-<!--           <p class="lead" style="text-align:center; font-family: 'Fjalla One', sans-serif;">-User1234</p> -->
+          <p class="lead" style="text-align:center; font-family: 'Fjalla One', sans-serif; color: green; visibility: hidden;" id='changes_applied'></p>
         </div>
       </div>
 
@@ -67,11 +67,14 @@
               <div class="col-md-2 col-md-offset-2">
                 <p class="lead">Password:</p>
               </div>
-              <div class="col-md-4" >
-                <input type="password" name="password" id="password" class="form-control input-md" placeholder="Password" value="****">
+              <div class="col-md-4" id='current_password'>
+                <p class="lead">******</p>
               </div>
-              <div class="col-md-1" >
-                <input type="edit" class="btn btn-md btn-primary btn-block" value="Edit">
+              <div class="col-md-1">
+                <input type="edit" class="btn btn-md btn-primary btn-block" value="Edit" id='edit_password'>
+              </div>
+              <div class="col-md-1" style='padding-top: 10px;'>
+                <input type="apply" class="btn btn-md btn-success btn-block" value="Apply" id='apply_password' style='visibility: hidden;'>
               </div>
             </div>
 
@@ -79,11 +82,14 @@
               <div class="col-md-2 col-md-offset-2">
                 <p class="lead">Email:</p>
               </div>
-              <div class="col-md-4" >
-                <input type="email" name="email" id="email" class="form-control input-md" placeholder="Email" value="user1234@domain.com">
+              <div class="col-md-4" id='email_input'>
+                <p class="lead">user1234@domain.com</p>
               </div>
               <div class="col-md-1" >
-                <input type="edit" class="btn btn-md btn-primary btn-block" value="Edit">
+                <input type="edit" class="btn btn-md btn-primary btn-block" value="Edit" id='edit_email'>
+              </div>
+              <div class="col-md-1" >
+                <input type="apply" class="btn btn-md btn-success btn-block" value="Apply" id='apply_email' style='visibility: hidden;'>
               </div>
             </div>
 
@@ -116,36 +122,10 @@
                 <!-- </div> -->
               </div>
               <div class="col-md-1 col-md-offset-2" >
-                <input type="apply" class="btn btn-md btn-success btn-block" value="Apply">
+                <input type="apply" class="btn btn-md btn-success btn-block" value="Apply" id='apply_email_preferences' style='visibility: hidden;'>
               </div>
             </div>
           </div>
-
-          <!-- <div class="form-group">
-            
-          </div> -->
-
-          <!-- <div class="form-group">
-            <div class="col-md-4" >
-              <p>... invites to collaborate on projects (recommended)?<br>
-              ... featured art and users?<br>
-              ... product updates and additions?</p>
-            </div>
-          </div> -->
-
-        <!-- <div class="body">
-          <p class="lead">Current Status: Free User</p>
-          <p class="lead">Username:</p>
-          <p class="lead">Password:
-          <input type="password" name="password" id="password" class="form-control input-md" placeholder="Password">
-          </p>
-
-          <p class="lead">Email:</p>
-          <p class="lead">Receive emails about...</p>
-          ... invites to collaborate on projects (recommended)? <br>
-          ... featured arts and users? <br>
-          ... product updates and additions?
-        </div> -->
         </form>
       </div>
     </div>
@@ -154,5 +134,144 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="resources/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+      document.getElementById('edit_password').onclick = function() {
+        var form_group = this.parentElement.parentElement;
+        form_group.removeChild(document.getElementById('current_password'));
+
+        var old_password = document.createElement('div');
+        old_password.className = 'col-md-4';
+        old_password.id = 'old_password';
+        var old_password_input = document.createElement('input');
+        old_password_input.className = 'form-control input-md';
+        old_password_input.placeholder = 'Old Password';
+        old_password.appendChild(old_password_input);
+        form_group.appendChild(old_password);
+
+        var hidden_div = document.createElement('div');
+        hidden_div.className = 'col-md-1';
+        hidden_div.id = 'hidden_div';
+        var hidden_div_input = document.createElement('input');
+        hidden_div_input.className = 'form-control input-md';
+        hidden_div_input.style = 'visibility: hidden;';
+        hidden_div.appendChild(hidden_div_input);
+        form_group.appendChild(hidden_div);
+
+        var new_password = document.createElement('div');
+        new_password.className = 'col-md-4';
+        new_password.id = 'new_password';
+        new_password.style = 'padding-top: 10px;';
+        var new_password_input = document.createElement('input');
+        new_password_input.className = 'form-control input-md';
+        new_password_input.placeholder = 'New Password';
+        new_password.appendChild(new_password_input);   
+        form_group.appendChild(new_password);
+
+        var confirm_new_password = document.createElement('div');
+        confirm_new_password.className = 'col-md-4 col-md-offset-4';
+        confirm_new_password.id = 'confirm_new_password';
+        confirm_new_password.style = 'padding-top: 10px;';
+        var confirm_new_password_input = document.createElement('input');
+        confirm_new_password_input.className = 'form-control input-md';
+        confirm_new_password_input.placeholder = 'Confirm New Password';
+        confirm_new_password.appendChild(confirm_new_password_input);  
+        form_group.appendChild(confirm_new_password);
+
+        var apply_password = document.getElementById('apply_password');
+        form_group.appendChild(apply_password.parentElement);
+        apply_password.style = 'visibility: visible;';
+
+        this.style = 'visibility: hidden;';
+        this.parentElement.parentElement.appendChild(this.parentElement);
+      };
+
+
+      document.getElementById('edit_email').onclick = function() {
+        var email_div = document.getElementById('email_input');
+        var current_email = email_div.innerText;
+        console.log(current_email);
+        email_div.innerHTML = '';
+        var email_input = document.createElement('input');
+        email_input.className = 'form-control input-md';
+        email_input.placeholder = 'sample@domain.com';
+        email_input.value = current_email;
+        email_div.appendChild(email_input);
+
+        this.style = 'visibility: hidden;';
+        this.parentElement.parentElement.appendChild(this.parentElement);
+        document.getElementById('apply_email').style = 'visibility: visible;';
+      };
+
+
+      document.getElementById("apply_email_preferences").onclick = function() {
+        var change_text = document.getElementById('changes_applied');
+        change_text.style.visibility = 'visible';
+        change_text.innerText = 'Email Preferences Changed.';
+
+        this.style.visibility = 'hidden';
+      };
+
+
+      document.getElementById("apply_email").onclick = function() {
+        var change_text = document.getElementById('changes_applied');
+        change_text.style.visibility = 'visible';
+        change_text.innerText = 'Email Address Changed.';
+
+        var email_div = document.getElementById('email_input');
+        var new_email = email_div.childNodes[0].value;
+        email_div.innerHTML = '';
+        var email_text = document.createElement('p');
+        email_text.className = 'lead';
+        email_text.innerText = new_email;
+        email_div.appendChild(email_text);
+
+        this.style = 'visibility: hidden;';
+        this.parentElement.parentElement.appendChild(this.parentElement);
+        document.getElementById('edit_email').style = 'visibility: visible;';
+      };
+
+
+      document.getElementById("apply_password").onclick = function() {
+        var change_text = document.getElementById('changes_applied');
+        change_text.style.visibility = 'visible';
+        change_text.innerText = 'Password Changed.';
+
+        var form_group = this.parentElement.parentElement;
+
+        form_group.removeChild(document.getElementById('old_password'));
+        form_group.removeChild(document.getElementById('hidden_div'));
+        form_group.removeChild(document.getElementById('new_password'));
+        form_group.removeChild(document.getElementById('confirm_new_password'));
+
+        var password = document.createElement('div');
+        password.className = 'col-md-4';
+        password.id = 'current_password';
+        var password_text = document.createElement('p');
+        password_text.className = 'lead';
+        password_text.innerText = '******';
+        password.appendChild(password_text);
+        form_group.appendChild(password);
+
+        var edit_password = document.getElementById('edit_password');
+        edit_password.style = 'visibility: visible;'; 
+        this.parentElement.parentElement.appendChild(edit_password.parentElement); 
+
+        this.style = 'visibility: hidden;';
+        this.parentElement.parentElement.appendChild(this.parentElement);      
+      };
+
+
+      var inputs = document.getElementsByTagName('input');
+      for(var i = 0; i < inputs.length; i++) {
+        if(inputs[i].type.toLowerCase() == 'checkbox') {
+          inputs[i].onclick = function() {
+            document.getElementById('apply_email_preferences').style = 'visibility: visible;';
+          };
+        }
+      }
+
+    </script>
   </body>
 </html>

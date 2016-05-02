@@ -3,35 +3,34 @@ body {
 }
 
 #homepage_logged_out {
-	/*background-image: url('resources/images/homepage_logged_out.png');*/
-	/*background-image: url('homepage_logged_out.png');*/
+	background-image: url('./images/homepage_logged_out.png');
 	background-repeat: no-repeat;
 	background-position: center 10%;
 	background-size: cover;
 }
 
 #homepage_logged_in {
-	/*background-image: url('./resources/images/splatter.png');*/
+	background-image: url('./images/splatter.png');
 	background-repeat: no-repeat;
 	background-position: center 10%;
 	background-size: cover;
 }
 
 #my_account {
-	/*background-image: url('./resources/images/splatter.png');*/
+	background-image: url('./images/splatter.png');
 	background-repeat: no-repeat;
 	background-position: center 10%;
 	background-size: cover;
 }
 
 .canvas_text {
-	background-image: url('./resources/images/background_canvas.png');
+	background-image: url('./images/background_canvas.png');
 	background-repeat: no-repeat;
 	background-position: center;
 }
 
 
-/*h1 {
+h1 {
 	font-size: 400%;
 	text-align: center;
 }
@@ -106,4 +105,4 @@ button {
 	background: rgba(0, 0, 0, 0.6);
 	border: 1px solid #FFFFFF;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}*/
+}
