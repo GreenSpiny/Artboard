@@ -246,6 +246,14 @@ $(document).ready(function(){
     }
   });
   
+  // Placeholder button alerts
+  $("#sharing button").click(function(){
+    alert($(this).attr("value"));
+  });
+  $("#export button").click(function(){
+    alert($(this).attr("value"));
+  });
+  
   // Set initial layer values
   $(".layer").css("backgroundColor","#ddd");
   layerObjects.push(new layerObject(1,0));
