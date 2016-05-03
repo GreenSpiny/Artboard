@@ -49,8 +49,7 @@ $(document).ready(function(){
   $("#mainCanvas").mousedown(function(event){
     canvasPressed = true;
     canvasPos = $("#mainCanvas").offset();
-    console.log(canvasPos);
-    pointsArray.push({x: event.clientX, y: event.clientY});
+    pointsArray.push({x: event.clientX - canvasPos.left, y: event.clientY - canvasPos.top});
   });
   
   $(".handle").mousedown(function(event){
