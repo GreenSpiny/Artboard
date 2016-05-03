@@ -1,4 +1,4 @@
-var pointsArray = [];         // Points stored for canvas drawing
+var pointsArray = [];              // Points stored for canvas drawing
 var canvasPos = {top: 0, left: 0}; // Top left corner of the canvas
 
 function initializeContext(ctx) {
@@ -8,8 +8,7 @@ function initializeContext(ctx) {
   
   $("#mainCanvas").mousemove(function(event) {
     if (canvasPressed) {
-      pointsArray.push({x: event.clientX, y: event.clientY});
-      console.log(event.clientX);
+      pointsArray.push({x: event.clientX - canvasPos.left, y: event.clientY - canvasPos.top});
       
       ctx.beginPath();
       ctx.moveTo(pointsArray[0].x, pointsArray[0].y);
