@@ -134,6 +134,7 @@ body {
   outline: 3px #aaa solid;
   background-color: rgb(0,0,0);
   z-index: 2;
+  cursor: pointer;
 }
 
 #secondaryColor {
@@ -146,6 +147,7 @@ body {
   outline: 3px #aaa solid;
   background-color: rgb(0,0,255);
   z-index: 1;
+  cursor: pointer;
 }
 
 #colorPicker {

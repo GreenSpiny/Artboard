@@ -342,6 +342,7 @@ function setValuesByInput(method) {
 function setValuesByColor(id) {
   TC = tinycolor($("#" + id).css("background-color"));
   setValuesByInput();
+  adjustPicker();
 }
 
 // Set values of color picker
